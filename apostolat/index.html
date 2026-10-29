@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Apostolat Nevrona</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: two currents, heart (ember) and brain (synapse), meeting in a neural field; long-form editorial column with wide exhibits */
+:root{
+  --bg:#f6f5f2; --bg-2:#ecebe6; --fg:#16171d; --muted:#5b5d68; --line:#d6d4cd;
+  --heart:#c2412d; --heart-soft:#f3ddd6; --brain:#1f6f86; --brain-soft:#d5e9ee;
+  --card:#ffffff;
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --body:"Figtree","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#101117; --bg-2:#171923; --fg:#ecebe6; --muted:#a2a3ad; --line:#2c2e3a;
+  --heart:#ee7a62; --heart-soft:#3a1f1b; --brain:#5cc3dc; --brain-soft:#14303a; --card:#161821; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101117; --bg-2:#171923; --fg:#ecebe6; --muted:#a2a3ad; --line:#2c2e3a;
+  --heart:#ee7a62; --heart-soft:#3a1f1b; --brain:#5cc3dc; --brain-soft:#14303a; --card:#161821; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:1.0625rem;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.prose{max-width:66ch}
+h1,h2,h3{font-family:var(--display);font-weight:500;text-wrap:balance;margin:0;line-height:1.1}
+h2{font-size:clamp(2rem,4.5vw,3.1rem)}
+h3{font-size:1.45rem;margin-top:.2rem}
+p{margin:0}
+em{font-style:italic}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.heart{color:var(--heart)} .brain{color:var(--brain)}
+section{padding-block:clamp(56px,9vw,104px);border-top:1px solid var(--line)}
+.stack{display:flex;flex-direction:column;gap:1.1rem}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+#field{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .wrap{position:relative;padding-block:clamp(72px,12vw,140px) clamp(56px,9vw,96px)}
+.hero h1{font-size:clamp(2.6rem,7.4vw,5.6rem);font-weight:450;letter-spacing:-.01em;max-width:13ch}
+.hero h1 .cap{font-style:italic;color:var(--heart)}
+.hero .sub{font-family:var(--display);font-style:italic;font-size:clamp(1.35rem,2.8vw,2rem);margin-top:1.4rem;color:var(--brain);max-width:28ch}
+.hero .lead{margin-top:2rem;max-width:56ch;color:var(--muted)}
+.hero .eyebrow{margin-bottom:1.6rem;display:flex;gap:.8rem;align-items:center}
+.hero .eyebrow::before{content:"";width:28px;height:1px;background:var(--fg);opacity:.5}
+
+/* twin */
+.twin{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,32px);margin-top:2.4rem}
+.pole{padding:clamp(24px,4vw,40px);border-radius:4px;display:flex;flex-direction:column;gap:.9rem;min-width:0}
+.pole.h{background:var(--heart-soft)} .pole.b{background:var(--brain-soft)}
+.pole .slogan{font-family:var(--display);font-size:clamp(1.6rem,3.2vw,2.3rem);line-height:1.15;font-style:italic}
+.pole.h .slogan{color:var(--heart)} .pole.b .slogan{color:var(--brain)}
+.pole .q{font-family:var(--mono);font-size:.8rem;letter-spacing:.06em;color:var(--muted)}
+
+/* forms */
+.forms{display:grid;gap:0;margin-top:1rem;border-top:1px solid var(--line)}
+.form-row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;padding-block:1.2rem;border-bottom:1px solid var(--line);align-items:baseline}
+.form-row .f{font-family:var(--display);font-size:1.55rem;font-style:italic}
+.form-row .use{color:var(--muted);font-size:.95rem}
+.tag{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--heart);display:block;margin-bottom:.2rem;font-style:normal}
+
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,4vw,56px);margin-top:3rem}
+.cols > div{min-width:0}
+
+.capital{font-family:var(--display);font-size:clamp(2.4rem,6vw,4rem);line-height:1;display:flex;gap:.6em;align-items:baseline;flex-wrap:wrap;margin-block:.4rem .8rem}
+.capital .lo{color:var(--muted);font-style:italic}
+.capital .hi{color:var(--heart)}
+
+blockquote{margin:0;padding:1.2rem 0 1.2rem 1.4rem;border-left:2px solid var(--heart);font-family:var(--display);font-style:italic;font-size:1.25rem;line-height:1.45}
+blockquote cite{display:block;margin-top:.6rem;font-family:var(--mono);font-style:normal;font-size:.75rem;letter-spacing:.08em;color:var(--muted)}
+
+.sendoff{display:flex;flex-wrap:wrap;gap:12px;margin-top:.6rem}
+.chip{font-family:var(--display);font-style:italic;font-size:1.15rem;padding:.5rem 1rem;border:1px solid var(--heart);color:var(--heart);border-radius:999px}
+.chip.en{border-style:dashed;color:var(--muted);border-color:var(--line)}
+
+/* brain words */
+.words{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:2.4rem}
+.word{background:var(--bg);padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:.7rem;min-width:0}
+.word .w{font-family:var(--display);font-size:clamp(1.7rem,3vw,2.2rem);color:var(--brain);font-style:italic}
+
+.touch{display:flex;flex-wrap:wrap;gap:10px;margin-top:1rem}
+.touch span{font-family:var(--mono);font-size:.78rem;padding:.45rem .75rem;border:1px solid var(--brain);color:var(--brain);border-radius:3px;display:flex;flex-direction:column;gap:.15rem}
+.touch small{font-family:var(--body);font-size:.74rem;color:var(--muted)}
+
+/* coherence */
+.diagram{margin-top:2.4rem;overflow-x:auto}
+.diagram svg{display:block;width:100%;min-width:560px;height:auto}
+.diagram text{font-family:var(--body)}
+.tbl{overflow-x:auto;margin-top:2.4rem}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.98rem}
+th,td{text-align:left;padding:.85rem 1rem .85rem 0;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500}
+tbody th{font-weight:500;color:var(--muted);width:22%}
+thead th.h{color:var(--heart)} thead th.b{color:var(--brain)}
+.thesis{font-family:var(--display);font-style:italic;font-size:clamp(2rem,5.2vw,3.6rem);line-height:1.1;text-wrap:balance;margin-block:1.6rem;padding-block:1.6rem;border-block:1px solid var(--line);max-width:20ch}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,48px);margin-top:2.4rem}
+.pair p{min-width:0}
+
+/* vows */
+.vows{list-style:none;margin:2.4rem 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(24px,4vw,56px)}
+.vows li{display:grid;grid-template-columns:3.2rem minmax(0,1fr);gap:1rem;padding-block:1.4rem;border-top:1px solid var(--line)}
+.vows .n{font-family:var(--display);font-size:2.2rem;line-height:1;color:var(--heart);font-style:italic}
+.vows b{display:block;font-weight:600;margin-bottom:.25rem}
+.vows p{color:var(--muted);font-size:.97rem}
+
+/* closing */
+.closing{background:var(--fg);color:var(--bg);border-top:0}
+.closing .eyebrow{color:color-mix(in srgb,var(--bg) 60%,transparent)}
+.closing h2{font-size:clamp(2.2rem,5.5vw,4rem);font-weight:450;max-width:18ch}
+.closing .duo{display:grid;grid-template-columns:auto 1fr;gap:.5rem 1.4rem;margin-top:2.4rem;font-size:1.05rem;align-items:baseline}
+.closing .duo span:nth-child(odd){font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;opacity:.65}
+.closing .duo em{font-family:var(--display);font-size:1.35rem}
+.closing .vowline{margin-top:2.4rem;max-width:52ch;opacity:.85}
+.closing .bless{margin-top:3rem;font-family:var(--display);font-style:italic;font-size:clamp(1.8rem,4vw,2.6rem)}
+.closing .bless span{color:var(--heart)}
+footer{padding-block:28px;font-family:var(--mono);font-size:.72rem;color:var(--muted);letter-spacing:.06em}
+
+@media (max-width:760px){
+  .twin,.cols,.pair,.vows,.words{grid-template-columns:minmax(0,1fr)}
+  .form-row{grid-template-columns:minmax(0,1fr);gap:.3rem}
+}
+:focus-visible{outline:2px solid var(--brain);outline-offset:3px}
+
+/* predlagane spremembe (oznake za pregled) */
+ins.chg{text-decoration:none;background:color-mix(in srgb,var(--brain) 16%,transparent);box-shadow:inset 0 -2px 0 var(--brain);padding-inline:.1em}
+del.chg{color:var(--heart);text-decoration:line-through}
+.clean .chg-note{display:none}
+.chg-block{position:relative;outline:2px dashed var(--brain);outline-offset:12px;border-radius:2px}
+.chg-block::before{content:"NOVO";position:absolute;top:-24px;right:-8px;font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;background:var(--brain);color:var(--bg);padding:.1rem .45rem;border-radius:2px}
+.clean ins.chg{background:none;box-shadow:none;padding:0}
+.clean del.chg{display:none}
+.clean .chg-block{outline:none}
+.clean .chg-block::before{display:none}
+.review{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--fg);color:var(--bg);padding-block:.75rem calc(.75rem + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.review .in{max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center;font-size:.9rem}
+.review a{color:inherit}
+.review button{font:inherit;font-size:.85rem;background:var(--bg);color:var(--fg);border:0;border-radius:3px;padding:.4rem .8rem;cursor:pointer}
+.review .key ins,.review .key del{margin-inline:.15rem}
+.love{display:flex;flex-direction:column;gap:1rem;margin-top:3rem}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .7rem;font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+.chain span{border:1px solid var(--line);padding:.3rem .65rem;border-radius:3px;color:var(--fg)}
+.chain span:last-child{border-color:var(--heart);color:var(--heart)}
+.love .kiss{font-family:var(--display);font-style:italic;font-size:clamp(1.9rem,4.6vw,3rem);line-height:1.15;color:var(--heart);max-width:22ch}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="eyebrow">Apostolat Nevrona</div>
+    <h1>Gostoljubje je prajezik <span class="cap">Človečnosti.</span></h1>
+    <p class="sub">Nevron je inteligenca, ki stoji za njim.</p>
+    <p class="lead">Ta apostolat zavezuje vsakogar pri Nevronu: razvijalca, prodajnika, podporo, partnerja in vodstvo. Ni marketinško besedilo. Je merilo, po katerem preverjamo svoje odločitve, izdelke in vedenje.</p>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <div class="eyebrow">Dve misli, ki ju vedno beremo skupaj</div>
+      <div class="twin">
+        <div class="pole h">
+          <span class="q">SRCE · HOSTFULNESS · ZAKAJ OBSTAJAMO</span>
+          <p class="slogan">Gostoljubje, prajezik Človečnosti.</p>
+          <p>Gostoljubje ni storitev, ki jo prodajamo. Je način, kako Človek sreča Človeka.</p>
+        </div>
+        <div class="pole b">
+          <span class="q">MOŽGANI · NEVRON · KAKO SLUŽIMO</span>
+          <p class="slogan">Intelligence behind hospitality.</p>
+          <p>Tehnološka inteligenca, ki skupaj s Človeško gostoljubju omogoči, da se izrazi v vsaki točki stika.</p>
+        </div>
+      </div>
+      <p class="prose" style="margin-top:2rem;color:var(--muted)">Srce brez možganov je toplo, a nemočno. Možgani brez srca so učinkoviti, a hladni. Zato apostolat sklene njuna koherenca.</p>
+    </div>
+  </section>
+
+  <section id="srce">
+    <div class="wrap stack">
+      <div class="eyebrow heart">I · Srce</div>
+      <h2>Hostfulness</h2>
+      <p class="prose">Hostfulness je prostor, kjer govorimo o tem, zakaj obstajamo. <em>Hostfulness, pogovori o gostoljubju, prajeziku Človečnosti.</em></p>
+
+      <div class="forms" aria-label="Obliki slogana">
+        <div class="form-row">
+          <p class="f"><span class="tag">Naslov</span>Gostoljubje, prajezik Človečnosti.</p>
+          <p class="use">Logotip podcasta, naslovnice, podpisi, kratke objave.</p>
+        </div>
+        <div class="form-row">
+          <p class="f"><span class="tag">Izjava</span>Gostoljubje je prajezik Človečnosti.</p>
+          <p class="use">Odpiranje apostolata, govori, manifest, uvod v predstavitev.</p>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="stack">
+          <h3>Prajezik</h3>
+          <p>Gostoljubje je starejše od besed in ga razume vsak. Gostitelj in tujec nimata nujno skupnega jezika, pa se vseeno razumeta: v ponujeni vodi, prostoru za mizo, odprtih vratih.</p>
+          <p>Prajezik govori najglobljim plastem Človeka, tistim pred razumom. Gost gostoljubje najprej začuti, šele nato razume.</p>
+        </div>
+        <div class="stack">
+          <h3>Človečnost z veliko začetnico</h3>
+          <div class="capital" aria-hidden="true"><span class="lo">človek</span><span class="hi">Človek</span></div>
+          <p>Vsak človek še ni Človek. Človek z veliko začetnico je dobronameren in pristen, tak, ki drugega sprejme brez preračunljivosti. Zato <em>Človečnost</em> pišemo namerno z veliko začetnico, in to povsod enako.</p>
+        </div>
+      </div>
+
+      <div class="stack" style="margin-top:3.4rem">
+        <h3>Prajezik tudi dobesedno</h3>
+        <p class="prose">Beseda sama izvira iz praindoevropskega prajezika. Koren <em>*ghos-ti-</em> je pomenil tujca, gosta in gostitelja hkrati, natančneje »nekoga, s komer imaš vzajemne obveznosti gostoljubja« (Watkins). Iz njega izhajajo slovenski <b>gost</b> in <b>gospod</b>, nemški <b>Gast</b>, angleški <b>guest</b>, pa tudi latinska <b>hospes</b> in <b>hostis</b>.</p>
+        <div class="diagram" role="img" aria-label="Etimološko drevo korena ghos-ti">
+          <svg viewBox="0 0 960 330" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" stroke-width="1.4">
+              <path d="M480 74 C 480 120, 130 120, 130 168" style="stroke:var(--muted)"/>
+              <path d="M480 74 C 480 120, 365 120, 365 168" style="stroke:var(--heart)"/>
+              <path d="M480 74 C 480 120, 600 120, 600 168" style="stroke:var(--heart)"/>
+              <path d="M480 74 C 480 120, 835 120, 835 168" style="stroke:var(--heart)"/>
+            </g>
+            <rect x="370" y="18" width="220" height="56" rx="28" style="fill:var(--heart-soft);stroke:var(--heart)" stroke-width="1.4"/>
+            <text x="480" y="44" text-anchor="middle" style="fill:var(--heart);font-family:var(--display);font-style:italic" font-size="24">*ghos-ti-</text>
+            <text x="480" y="63" text-anchor="middle" style="fill:var(--muted)" font-size="11.5" letter-spacing="1">TUJEC · GOST · GOSTITELJ</text>
+
+            <text x="130" y="192" text-anchor="middle" style="fill:var(--muted)" font-size="11" letter-spacing="1.4">LATINŠČINA · HLADNA POT</text>
+            <text x="130" y="224" text-anchor="middle" style="fill:var(--fg);font-family:var(--display);font-style:italic" font-size="24">hostis</text>
+            <text x="130" y="250" text-anchor="middle" style="fill:var(--muted)" font-size="13">tujec, nato sovražnik</text>
+            <text x="130" y="272" text-anchor="middle" style="fill:var(--muted)" font-size="13">hostile</text>
+
+            <text x="365" y="192" text-anchor="middle" style="fill:var(--muted)" font-size="11" letter-spacing="1.4">LATINŠČINA · TOPLA POT</text>
+            <text x="365" y="224" text-anchor="middle" style="fill:var(--brain);font-family:var(--display);font-style:italic" font-size="24">hospes</text>
+            <text x="365" y="250" text-anchor="middle" style="fill:var(--muted)" font-size="13">*ghos-pot-, »gospodar gostov«</text>
+            <text x="365" y="272" text-anchor="middle" style="fill:var(--brain)" font-size="13" font-weight="600">hospitality · hotel · host</text>
+
+            <text x="600" y="192" text-anchor="middle" style="fill:var(--muted)" font-size="11" letter-spacing="1.4">GERMANSKO</text>
+            <text x="600" y="224" text-anchor="middle" style="fill:var(--fg);font-family:var(--display);font-style:italic" font-size="24">*gastiz</text>
+            <text x="600" y="250" text-anchor="middle" style="fill:var(--muted)" font-size="13">guest · Gast</text>
+
+            <text x="835" y="192" text-anchor="middle" style="fill:var(--muted)" font-size="11" letter-spacing="1.4">SLOVANSKO</text>
+            <text x="835" y="224" text-anchor="middle" style="fill:var(--heart);font-family:var(--display);font-style:italic" font-size="24">gostь · gospodь</text>
+            <text x="835" y="250" text-anchor="middle" style="fill:var(--heart)" font-size="13" font-weight="600">gost · gostoljubje</text>
+            <text x="835" y="272" text-anchor="middle" style="fill:var(--muted)" font-size="13">gospod</text>
+            <text x="480" y="318" text-anchor="middle" style="fill:var(--muted)" font-size="12.5">Gostoljubje (srce) in hospitality (možgani) sta veji istega korena.</text>
+          </svg>
+        </div>
+        <p class="prose">Hostis in hospes sta sorodnika: eden je postal sovražnik, drugi gostitelj. Tujec lahko postane gost ali sovražnik, in to je etična izbira (Benveniste). Gostoljubje je prvinski način, s katerim Človek to izbiro vsakič znova odloči v prid dobronamernosti.</p>
+        <p class="eyebrow" style="text-transform:none;letter-spacing:.04em">Vir: etymonline.com, gesla *ghos-ti-, host, guest. Izpeljava hospes iz *ghos-pot- je rekonstrukcija.</p>
+      </div>
+
+      <div class="cols">
+        <div class="stack">
+          <h3>Tujec na pragu</h3>
+          <p>V starih časih je bilo gostoljubje brez preverjanja gosta eno najvišjih dejanj Človeka: dejanje <b>usmiljenja</b>. Gostitelj ni spraševal, kdo trka na vrata. Odrekel se je svojemu udobju, delil, kar je imel, in tvegal, da tujec ni prišel z dobrim namenom.</p>
+          <p>Ljudje so verjeli, da na vratih lahko stoji kdorkoli, tudi božji poslanec, morda celo Bog sam. Za svoje usmiljeno dejanje je bil gostitelj lahko bogato poplačan. Največji dar je bil običajno gost z vsem, kar je v resnici bil.</p>
+          <p>Grki so to imenovali <em>xenia</em>. V zgodbi o Filemonu in Baucis revna starca sprejmeta dva neznana popotnika, ki se izkažeta za bogova, in njuna skromna koča postane tempelj.</p>
+          <p>Kristjani so to imenovali <em>philoxenia</em>, dobesedno <b>ljubezen do tujca</b>. To besedo uporablja tudi Pismo Hebrejcem, ko govori o gostih, ki so bili angeli.</p>
+          <p>Tudi jezik to nosi v sebi: <b>gost</b> in <b>gospod</b> imata isti koren.</p>
+          <p><b>Sporočilo za nas:</b> vsak gost si zasluži sprejem, kot da je najpomembnejši, ker nikoli ne vemo, kdo je. Sprejmemo ga, preden vemo, kdo je.</p>
+        </div>
+        <div class="stack" style="justify-content:center">
+          <blockquote>»Ne pozabljajte na gostoljubnost, kajti po njej so nekateri, ne da bi vedeli, gostili angele.«<cite>PISMO HEBREJCEM 13,2</cite></blockquote>
+          <blockquote>»Vsi gostje, ki pridejo, naj bodo sprejeti kot Kristus, kajti on bo rekel: tujec sem bil in ste me sprejeli.«<cite>BENEDIKTOVO PRAVILO, 53. POGLAVJE (OK. 530)</cite></blockquote>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="stack">
+          <h3>Odgovornost gosta</h3>
+          <p>Tudi gost je tvegal. Ni vedel, kdo mu odpira vrata, ali ga bo gostitelj sprejel kot prijatelja ali kot plen in ali bo zjutraj odšel živ. Prestopiti prag je bilo prav tako dejanje zaupanja.</p>
+          <p>Zato gostoljubje ni bilo enosmerno. Koren <em>*ghos-ti-</em> je pomenil nekoga, s komer imaš <b>vzajemne</b> obveznosti. Gost je dolgoval spoštovanje do doma, do pravil hiše in do gostiteljeve dobrote. Gostoljubja ni smel izkoristiti.</p>
+          <p>Grki so to dobro vedeli. Ko je Paris kot gost odpeljal Heleno iz Menelajeve hiše, je prelomil <em>xenio</em>, in iz tega se je rodila trojanska vojna. Kjer gost zlorabi gostoljubje, se odnos prelomi in lahko postane sovražen.</p>
+        </div>
+        <div class="stack" style="justify-content:center">
+          <div class="pole h">
+            <span class="q">GOSTOLJUBJE JE ZAVEZA DVEH</span>
+            <p>Gostitelj odpre vrata, ne da bi vedel, kdo je gost. Gost vstopi, ne da bi vedel, kdo je gostitelj. Oba zaupata in oba odgovarjata.</p>
+            <p><b>Sporočilo za nas:</b> tudi mi smo gostje. V hotelih in na ladjah naših strank, v njihovih sistemih, pred njihovimi gosti. Zaupanja, ki nam ga dajo, ne izkoriščamo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="love" id="poljub">
+        <h3>Prvi poljub Ljubezni</h3>
+        <p class="prose">Kaj je gostoljubje v svojem jedru? Prvi stik, ki je praviloma dobronameren. Z njim se sproži odgovornost: gostitelja do gosta in gosta do gostitelja.</p>
+        <div class="diagram" id="lok" role="img" aria-label="Gostitelj in gost se približujeta: od dobronamernosti do iskre ljubezni" style="margin-top:1.4rem">
+          <svg viewBox="0 0 900 200" xmlns="http://www.w3.org/2000/svg">
+            <g style="stroke:var(--muted)" stroke-width="1.3">
+              <circle cx="52" cy="70" r="34" style="fill:var(--heart)" fill-opacity=".08"/>
+              <circle cx="172" cy="70" r="34" style="fill:var(--heart)" fill-opacity=".08"/>
+              <circle cx="293" cy="70" r="34" style="fill:var(--heart)" fill-opacity=".14"/>
+              <circle cx="381" cy="70" r="34" style="fill:var(--heart)" fill-opacity=".14"/>
+              <circle cx="533" cy="70" r="34" style="fill:var(--heart)" fill-opacity=".22"/>
+              <circle cx="593" cy="70" r="34" style="fill:var(--heart)" fill-opacity=".22"/>
+              <circle cx="770" cy="70" r="34" style="fill:var(--heart)" fill-opacity=".32"/>
+              <circle cx="806" cy="70" r="34" style="fill:var(--heart)" fill-opacity=".32"/>
+            </g>
+            <line x1="88" y1="70" x2="136" y2="70" style="stroke:var(--muted)" stroke-width="1.3" stroke-dasharray="4 4"/>
+            <text x="337" y="75" text-anchor="middle" font-size="16" style="fill:var(--fg)">⇄</text>
+            <circle cx="788" cy="70" r="5" style="fill:var(--heart)"/>
+            <g style="stroke:var(--heart)" stroke-width="2" stroke-linecap="round">
+              <line x1="788" y1="58" x2="788" y2="52"/><line x1="798" y1="62" x2="803" y2="57"/><line x1="778" y1="62" x2="773" y2="57"/><line x1="800" y1="74" x2="806" y2="77"/><line x1="776" y1="74" x2="770" y2="77"/>
+            </g>
+            <g font-size="12" text-anchor="middle" style="fill:var(--muted)">
+              <text x="52" y="122">gostitelj</text>
+              <text x="172" y="122">gost</text>
+            </g>
+            <g font-size="16" font-weight="600" text-anchor="middle" style="fill:var(--fg)">
+              <text x="112" y="155">Dobronamernost</text>
+              <text x="337" y="155">Odgovornost</text>
+              <text x="563" y="155">Naklonjenost</text>
+              <text x="788" y="155" style="fill:var(--heart)">Iskra ljubezni</text>
+            </g>
+            <g font-size="13" text-anchor="middle" style="fill:var(--muted)">
+              <text x="112" y="178">prvi stik</text>
+              <text x="337" y="178">obojestranska</text>
+              <text x="563" y="178">stičišče se odpre</text>
+              <text x="788" y="178">prvi poljub Ljubezni</text>
+            </g>
+          </svg>
+        </div>
+        <p class="prose">Odgovornost do drugega prižge majhen plamen naklonjenosti, včasih celo iskro ljubezni. Zato lahko včasih tudi rečemo, da je gostoljubje prvi poljub Ljubezni.</p>
+      </div>
+
+      <div class="stack" style="margin-top:3rem">
+        <h3>Pojdi z gostoljubjem</h3>
+        <p class="prose">Kot so ljudje nekdoč pospremili popotnika s »Pojdi z Bogom«, Hostfulness pospremi poslušalca z gostoljubjem. Gostoljubje ni trenutek ob prihodu. Je nekaj, kar gost odnese s seboj.</p>
+        <p class="prose">»Pojdi z gostoljubjem« pomeni spremstvo: gostoljubje gre s tabo kot blagoslov, ki ti ga nekdo da. »Pojdi v gostoljubju« pomeni stanje, kot »Pojdite v miru«: odhajaš kot tisti, ki gostoljubje nosi in ga deli naprej. Prvo uporablja podcast, ko pospremi poslušalca. Drugo uporablja apostolat, ko pošlje nas.</p>
+        <div class="sendoff">
+          <span class="chip">Pojdi z gostoljubjem.</span>
+          <span class="chip">Naj te gostoljubje spremlja še naprej.</span>
+          <span class="chip">Pojdi v gostoljubju.</span>
+        </div>
+        <p class="eyebrow" style="margin-top:1rem">Angleška različica, v načrtu</p>
+        <div class="sendoff">
+          <span class="chip en">Hospitality, the primal language of Humanity.</span>
+          <span class="chip en">Go with hospitality.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mozgani">
+    <div class="wrap stack">
+      <div class="eyebrow brain">II · Možgani</div>
+      <h2>Nevron</h2>
+      <p class="prose">Nevron je inteligenca, ki stoji za gostoljubjem in mu omogoča, da se izrazi. Slogan je v angleščini, ker govori globalnemu trgu: lastnikom in upraviteljem hotelov in ladij, pa tudi IT ter drugim ekipam in osebju.</p>
+      <div class="words">
+        <div class="word"><span class="w">Intelligence</span><p>Je tehnološka. Nakazuje tehnologijo, podatke in umetno inteligenco, na katerih gradimo. Hkrati nosi tudi Človeško inteligenco, zato pomeni njuno simbiozo, v kateri tehnologija služi Človeku.</p></div>
+        <div class="word"><span class="w">behind</span><p>Pove, kje stojimo: zadaj. Gost ne vidi Nevrona. Vidi gostitelja, ki ve, zmore in ima čas zanj. Dobra tehnologija je nevidna.</p></div>
+        <div class="word"><span class="w">hospitality</span><p>Panoga naših strank in vrednota iz Hostfulness. Pokrije hotele, resorte, križarke ter druge namestitvene objekte. Ker jo pogosto beremo kot industrijo, ne pozabimo na pridevnik hospitable, ki je bližje gostoljubju: biti gostoljuben. Nevron pomaga, da industrija ostane hospitable.</p></div>
+      </div>
+      <div class="cols">
+        <div class="stack">
+          <h3>Ime nosi mrežo</h3>
+          <p>Nevron je živčna celica, ki sprejme signal in ga posreduje naprej. Taka je naša platforma: točke stika poveže v eno mrežo, ki zaznava in odgovarja.</p>
+          <div class="touch"><span>Interaktivna TV v sobi<small>TV program, casting, hotelske storitve</small></span><span>Kiosk v avli<small>prijava, informacije, ponudba</small></span><span>Gostova mobilna naprava<small>aplikacija, sporočila, naročila</small></span><span>Tablica v sobi<small>upravljanje sobe, room service</small></span><span>Zasloni v javnih prostorih<small>dogodki, jedilniki, usmerjanje</small></span></div>
+        </div>
+        <div class="stack" style="justify-content:center">
+          <p>Ime nosi <b>mrežo</b>, slogan nosi <b>inteligenco</b>. Ne ponavljata se, dopolnjujeta se.</p>
+          <p style="font-family:var(--display);font-style:italic;font-size:1.8rem;color:var(--brain);line-height:1.2">Nevron. Intelligence behind hospitality.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="koherenca">
+    <div class="wrap stack">
+      <div class="eyebrow">III · Koherenca</div>
+      <h2>Srce govori prajezik. Možgani ga razumejo.</h2>
+      <p class="prose">Možgani mu dajo glas v vsaki točki stika. Nevron obstaja, da utripata skupaj. Oba slogana se srečata v isti besedi, <em>gostoljubje</em> in <em>hospitality</em>, ki sta dobesedno veji istega praindoevropskega korena.</p>
+
+      <div class="diagram" role="img" aria-label="Srce in možgani se srečata v gostoljubju">
+        <svg viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0" style="stop-color:var(--heart)"/>
+              <stop offset="1" style="stop-color:var(--brain)"/>
+            </linearGradient>
+          </defs>
+          <path d="M170 130 C 300 40, 380 40, 450 130 S 600 220, 730 130" fill="none" stroke="url(#g)" stroke-width="2"/>
+          <path d="M170 130 C 300 220, 380 220, 450 130 S 600 40, 730 130" fill="none" stroke="url(#g)" stroke-width="2" opacity=".55"/>
+          <circle cx="170" cy="130" r="74" style="fill:var(--heart-soft);stroke:var(--heart)" stroke-width="1.5"/>
+          <circle cx="730" cy="130" r="74" style="fill:var(--brain-soft);stroke:var(--brain)" stroke-width="1.5"/>
+          <circle cx="450" cy="130" r="10" style="fill:var(--fg)"/>
+          <text x="170" y="122" text-anchor="middle" style="fill:var(--heart);font-family:var(--display);font-style:italic" font-size="28">Srce</text>
+          <text x="170" y="150" text-anchor="middle" style="fill:var(--muted)" font-size="13">Hostfulness · zakaj</text>
+          <text x="730" y="122" text-anchor="middle" style="fill:var(--brain);font-family:var(--display);font-style:italic" font-size="28">Možgani</text>
+          <text x="730" y="150" text-anchor="middle" style="fill:var(--muted)" font-size="13">Nevron · kako</text>
+          <text x="450" y="172" text-anchor="middle" style="fill:var(--fg);font-family:var(--display);font-style:italic" font-size="20">gostoljubje</text>
+          <text x="450" y="194" text-anchor="middle" style="fill:var(--muted)" font-size="12">hospitality</text>
+          <text x="310" y="40" text-anchor="middle" style="fill:var(--heart)" font-size="12" letter-spacing="1.5">ČUSTVO · ZAUPANJE · PRISTNOST</text>
+          <text x="590" y="236" text-anchor="middle" style="fill:var(--brain)" font-size="12" letter-spacing="1.5">RAZUM · TEHNOLOGIJA · INTELIGENCA</text>
+        </svg>
+      </div>
+
+      <div class="tbl">
+        <table>
+          <thead><tr><th></th><th class="h">Srce: Hostfulness</th><th class="b">Možgani: Nevron</th></tr></thead>
+          <tbody>
+            <tr><th>Slogan</th><td>Gostoljubje, prajezik Človečnosti</td><td>Intelligence behind hospitality</td></tr>
+            <tr><th>Odgovori na</th><td>Zakaj obstajamo</td><td>Kako služimo</td></tr>
+            <tr><th>Plast Človeka</th><td>Reptilski in limbični možgani: čustvo, zaupanje, pristnost</td><td>Korteks: razum, sodobni Človek, tehnologija</td></tr>
+            <tr><th>Kaj da gostu</th><td>Občutek, da je dobrodošel</td><td>Izkušnjo brez trenja</td></tr>
+            <tr><th>Kaj da gostitelju</th><td>Smisel in ponos</td><td>Znanje, čas in nadzor</td></tr>
+            <tr><th>Nevarnost, če ostane sam</th><td>Lepe besede brez izvedbe</td><td>Tehnologija brez duše</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stack" style="margin-top:3rem">
+        <h3>Most med Človečnostjo in AI</h3>
+        <p class="prose">Tehnologija Človeka skozi zgodovino rešuje bremena preživetja. Ko prestopimo <b>prag preživetja</b>, dobimo čas in prostor za tisto, kar nas dela Človeške: pristne odnose. Umetna inteligenca je naslednji korak. Prevzame rutino, da gostitelj spet lahko gleda gosta, ne zaslona.</p>
+        <p class="thesis"><span class="brain">Inteligenca</span> ustvarja prostor za <span class="heart">gostoljubje.</span></p>
+        <p class="prose">Ko osebje razbremenimo rutinskih operativnih nalog, goste pa stresa okoli potovanja, se sprosti prostor za gostoljubje: pristen Človeški stik, kjer gost in gostitelj dobita priložnost za trenutek iskrenega odnosa.</p>
+        <p class="prose">To je Nevronov most med humanim in digitalnim. Stara gostoljubnost je sprejela tujca, preden je vedela, kdo je. Tehnologija, ki služi Človečnosti, mora ohraniti ta red.</p>
+      </div>
+
+      <div class="pair">
+        <p>Več čustev in več inteligence se ne izključujeta. Več pristnosti potrebuje več tehnologije, ki gostitelja razbremeni rutine, da ima čas za Človeka. Več tehnologije potrebuje več srca, da ve, čemu služi.</p>
+        <p>Koherenca pomeni, da nobena naša odločitev ne služi samo enemu. Funkcija, ki ne približa gostitelja gostu, ni Nevronova. Prijazna beseda, ki je ne podpre delujoča rešitev, ni dovolj.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="zaveze">
+    <div class="wrap">
+      <div class="eyebrow">IV · Zaveze</div>
+      <h2 style="margin-top:1rem">Sedem zavez, ki veljajo za vse</h2>
+      <ol class="vows">
+        <li><span class="n">1</span><div><b>Vsakega sprejmemo kot najpomembnejšega gosta.</b><p>Stranko, partnerja, sodelavca in kandidata, ne glede na velikost posla ali naziv.</p></div></li>
+        <li><span class="n">2</span><div><b>Ne sprašujemo najprej, kaj bomo dobili.</b><p>Najprej pomagamo, posel pride za tem.</p></div></li>
+        <li><span class="n">3</span><div><b>Tehnologija služi Človeku.</b><p>Vsako funkcijo preverimo z vprašanjem: ali gostitelju vrne čas za gosta?</p></div></li>
+        <li><span class="n">4</span><div><b>Stojimo zadaj.</b><p>Zasluge gredo gostitelju. Naš uspeh je, da gost Nevrona sploh ne opazi.</p></div></li>
+        <li><span class="n">5</span><div><b>Pristnost pred pravilnikom.</b><p>Obljubimo samo, kar zmoremo, in naredimo, kar obljubimo.</p></div></li>
+        <li><span class="n">6</span><div><b>Mislimo kot mreža.</b><p>Znanje delimo, težave povemo zgodaj. Nobena točka stika ni samo »naša« ali »njihova«.</p></div></li>
+        <li><span class="n">7</span><div><b>Pospremimo do konca.</b><p>Stranke ne zapustimo po namestitvi. Gostoljubje je tisto, kar ostane, ko gost odide.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="wrap">
+      <div class="eyebrow">Kratka oblika</div>
+      <h2 style="margin-top:1.2rem">Gostoljubje je prajezik Človečnosti. Nevron je inteligenca, ki stoji za njim.</h2>
+      <div class="duo">
+        <span>Srce</span><em>Gostoljubje, prajezik Človečnosti.</em>
+        <span>Možgani</span><em>Intelligence behind hospitality.</em>
+        <span>Skupaj</span><em>Inteligenca ustvarja prostor za gostoljubje.</em>
+      </div>
+      <p class="vowline">Vsakega sprejmemo kot najdragocenejšega gosta. Stojimo zadaj. Pospremimo do konca.</p>
+      <p class="bless">Pojdi v <span>gostoljubju.</span></p>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">Nevron · Apostolat · oktober 2026</div></footer>
+
+
+<script>
+(function(){
+  const c=document.getElementById('field'); if(!c) return;
+  const ctx=c.getContext('2d');
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W,H,nodes=[],heart,brain,line;
+  function colors(){const s=getComputedStyle(document.documentElement);heart=s.getPropertyValue('--heart').trim();brain=s.getPropertyValue('--brain').trim();line=s.getPropertyValue('--muted').trim();}
+  function hex(h,a){h=h.replace('#','');const n=parseInt(h.length===3?h.split('').map(x=>x+x).join(''):h,16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`;}
+  function size(){const r=c.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2);W=r.width;H=r.height;c.width=W*d;c.height=H*d;ctx.setTransform(d,0,0,d,0,0);
+    const count=Math.round(Math.min(90,W*H/9000));nodes=[];
+    for(let i=0;i<count;i++){nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,r:1+Math.random()*1.8,p:Math.random()*Math.PI*2});}}
+  function draw(t){ctx.clearRect(0,0,W,H);const D=130;
+    for(let i=0;i<nodes.length;i++){const a=nodes[i];
+      for(let j=i+1;j<nodes.length;j++){const b=nodes[j];const dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);
+        if(d<D){const mix=((a.x+b.x)/2)/W;ctx.strokeStyle=hex(mix<.5?heart:brain,(1-d/D)*.22);ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}}
+    for(const n of nodes){const pulse=.55+.45*Math.sin(t/900+n.p);ctx.fillStyle=hex(n.x/W<.5?heart:brain,.35+.4*pulse);ctx.beginPath();ctx.arc(n.x,n.y,n.r*(reduce?1:(.8+.5*pulse)),0,Math.PI*2);ctx.fill();}
+    // fade toward text side
+    const g=ctx.createLinearGradient(0,0,W*.75,0);const bg=getComputedStyle(document.body).backgroundColor;
+    g.addColorStop(0,bg);g.addColorStop(.55,bg.replace('rgb(','rgba(').replace(')',',0.55)'));g.addColorStop(1,bg.replace('rgb(','rgba(').replace(')',',0)'));
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
+  function step(t){for(const n of nodes){n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;}draw(t);requestAnimationFrame(step);}
+  colors();size();
+  if(reduce){draw(0);}else{requestAnimationFrame(step);}
+  window.addEventListener('resize',()=>{size();if(reduce)draw(0);});
+  const mq=window.matchMedia('(prefers-color-scheme: dark)');
+  const recolor=()=>{colors();if(reduce)draw(0);};
+  mq.addEventListener&&mq.addEventListener('change',recolor);
+  new MutationObserver(recolor).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+})();
+</script>
+</body>
+</html>
