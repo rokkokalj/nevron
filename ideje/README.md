@@ -1,17 +1,11 @@
-# Ideje za objave in članke
+# Ideje
 
-Samo konkretne vsebinske ideje za LinkedIn/X, članke Hospitality Abundance, vprašanja za podcast Hostfulness in drug nevronov izhod. Splošni zapiski ob poslušanju podcastov in branju knjig gredo v ločen repozitorij `rokkokalj/personal` (Context odpre mapo, ko Rok potrdi ime).
+Za zdaj ena datoteka: [`ideje.md`](ideje.md). Poglavja: Poslovne ideje, Cene in ponudba, Produkt, Content, Drugo. Poglavja se lahko dodajajo; ko zraste, se lahko razdeli v več datotek.
 
-| Pot | Vloga |
-|---|---|
-| `INDEX.md` | seznam idej (en vnos = ena vrstica + povezava na zapisek) |
-| `zapiski/` | posamezni zapiski |
-| `zapiski/_predloga.md` | predloga za nov zapisek |
+Samo konkretne nevronove ideje. Splošni zapiski ob poslušanju in branju gredo v `rokkokalj/personal/zapiski/`.
 
-**Pisec zapiskov:** Composer (ko Rok narekuje).  
-**Lokacija in format:** Context.  
-**Ne gre sem:** splošni zapiski ob poslušanju in branju (`rokkokalj/personal`), Dropbox (arhiv), `NevronNativeAI/content` (stroj pravil, ne delovna vsebina).
+**Pisec:** Composer. **Struktura:** Context.
 
 Ime mape `nevron` se lahko pozneje razširi, če bo Rok hotel dom tudi za vsebinske ideje zunaj Nevrona; za zdaj ostane `ideje/` tukaj.
 
-Potrjeno: Rok, 22. 11. 2026 (prek Composerja).
+Ne gre sem: Dropbox (arhiv), `NevronNativeAI/content` (stroj pravil, ne delovna vsebina).
