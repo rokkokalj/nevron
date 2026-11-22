@@ -4,4 +4,4 @@
 
 ## Ideje
 
-[`ideje/`](ideje/README.md) je delovni predal za vsebinske ideje. Composer piše zapiske; Context ima lokacijo in format.
+[`ideje/`](ideje/README.md) je delovni predal samo za konkretne vsebinske ideje za LinkedIn/X, članke Hospitality Abundance, vprašanja za podcast Hostfulness in drug nevronov izhod. Splošni zapiski ob poslušanju podcastov in branju knjig gredo v `rokkokalj/personal`. Composer piše zapiske; Context ima lokacijo in format.
